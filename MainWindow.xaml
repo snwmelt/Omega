@@ -39,10 +39,10 @@
 
 
 
-        <StackPanel x:Name="MathPanel" Grid.Column="0" Grid.Row="0" Width="320" HorizontalAlignment="Left" Margin="25,25.17,0,10.83">
+        <StackPanel x:Name="MathPanel" Grid.Column="0" Grid.Row="0" Width="320" HorizontalAlignment="Left" Margin="25,25,0,11">
             <TextBox x:Name="textBox" Height="34" Margin="115,2,7,2" TextWrapping="Wrap" VerticalAlignment="Top" d:LayoutOverrides="HorizontalAlignment"/>
             <TextBox x:Name="textBox1" Height="34" Margin="115,2,7,2" TextWrapping="Wrap"/>
-            <StackPanel Orientation="Horizontal" Margin="110,0,0,0" RenderTransformOrigin="0.488,0.554" Height="68.51">
+            <StackPanel Orientation="Horizontal" Margin="110,30,0,0" RenderTransformOrigin="0.488,0.554" Height="39.68" VerticalAlignment="Bottom" HorizontalAlignment="Right">
                 <Button x:Name="button"  Content="Add" Height="30" Width="96" Margin="2" VerticalAlignment="Bottom"/>
                 <Button x:Name="button1" Content="Subtract" Height="30"  Width="96" Margin="2" VerticalAlignment="Bottom" RenderTransformOrigin="0.812,0.561" />
             </StackPanel>
