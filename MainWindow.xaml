@@ -1,0 +1,22 @@
+﻿<Window x:Class="Omega.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Omega"
+        mc:Ignorable="d"
+        Title="Omega" Height="514" Width="573">
+    <Grid>
+        <Menu x:Name="menu" VerticalAlignment="Top" Height="20">
+            <MenuItem x:Name="fileButton" Header="_File">
+                <MenuItem x:Name="newmenuButton" Header="New" Click="newbuttonCommand"/>
+                <MenuItem x:Name="exitButton" Header="E_xit" Click="exitButtonCommand"/>
+                
+            </MenuItem>
+            <MenuItem x:Name="helpButton" Header="Help">
+                <MenuItem x:Name="aboutButton" Header="A_bout" Click="aboutButtonCommand"/>
+            </MenuItem>
+        </Menu>
+
+    </Grid>
+</Window>
