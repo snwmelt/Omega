@@ -25,15 +25,27 @@
                 <MenuItem x:Name="aboutButton" Header="A_bout" Click="aboutButtonCommand"/>
             </MenuItem>
         </Menu>
-        <GroupBox x:Name="groupBox" Header="Info" Margin="48,25,10,12" Grid.Column="1"/>
-        <Label x:Name="infonameLabel" Content="Label" Height="30" Margin="63,48,21,0" VerticalAlignment="Top" Grid.Column="1"/>
-        <Label x:Name="infostartingamountLabel" Content="Label" Margin="63,78,21,79" Grid.Column="1"/>
-        <Label x:Name="infogoalamountLabel" Content="Label" Height="31" Margin="63,0,21,48" VerticalAlignment="Bottom" Grid.Column="1"/>
-        <Label x:Name="InfopercentageachievedLabel" Content="Label" Height="24" Margin="63,0,21,24" VerticalAlignment="Bottom" Grid.Column="1"/>
-        <Button x:Name="button" Content="Add" Margin="139,0,136,23.02" VerticalAlignment="Bottom" RenderTransformOrigin="-0.173,0.445" Width="80" Height="30" d:LayoutOverrides="HorizontalAlignment"/>
-        <Button x:Name="button1" Content="Subtract" Height="30" Margin="233,0,42,23.02" VerticalAlignment="Bottom" Width="80"/>
-        <TextBox x:Name="textBox" Height="34" Margin="125,48,42,0" TextWrapping="Wrap" VerticalAlignment="Top" d:LayoutOverrides="HorizontalAlignment"/>
-        <TextBox x:Name="textBox1" Margin="125,87,42,67" TextWrapping="Wrap"/>
+        <Grid Grid.Column="1" Margin="20,25,13,5.83">
 
+            <GroupBox x:Name="groupBox" Header="Info"/>
+            <Label x:Name="infonameLabel" Content="Label" Height="30" Margin="13,21.83,13,0" VerticalAlignment="Top"/>
+            <Label x:Name="infostartingamountLabel" Content="Label" Margin="13,51.83,13,68.17"/>
+            <Label x:Name="infogoalamountLabel" Content="Label" Height="31" Margin="13,0,13,37.17" VerticalAlignment="Bottom"/>
+            <Label x:Name="infopercentageachievedLabel" Content="Label" Height="24" Margin="13,0,13,13.17" VerticalAlignment="Bottom"/>
+
+
+
+        </Grid>
+
+
+
+        <StackPanel x:Name="MathPanel" Grid.Column="0" Grid.Row="0" Width="320" HorizontalAlignment="Left" Margin="25,25.17,0,10.83">
+            <TextBox x:Name="textBox" Height="34" Margin="115,2,7,2" TextWrapping="Wrap" VerticalAlignment="Top" d:LayoutOverrides="HorizontalAlignment"/>
+            <TextBox x:Name="textBox1" Height="34" Margin="115,2,7,2" TextWrapping="Wrap"/>
+            <StackPanel Orientation="Horizontal" Margin="110,0,0,0" RenderTransformOrigin="0.488,0.554" Height="68.51">
+                <Button x:Name="button"  Content="Add" Height="30" Width="96" Margin="2" VerticalAlignment="Bottom"/>
+                <Button x:Name="button1" Content="Subtract" Height="30"  Width="96" Margin="2" VerticalAlignment="Bottom" RenderTransformOrigin="0.812,0.561" />
+            </StackPanel>
+        </StackPanel>
     </Grid>
 </Window>
