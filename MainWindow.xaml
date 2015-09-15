@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Omega"
         mc:Ignorable="d"
-        Title="Omega" Height="600" Width="598" ResizeMode="NoResize">
+        Title="Omega" Height="511" Width="593" ResizeMode="NoResize">
     <Grid Margin="0,10,4,13.5">
         <Grid.RowDefinitions>
             <RowDefinition Height="93*"/>
@@ -18,6 +18,8 @@
         <Menu x:Name="menu" VerticalAlignment="Top" Height="20" Grid.ColumnSpan="2">
             <MenuItem x:Name="fileButton" Header="_File">
                 <MenuItem x:Name="newmenuButton" Header="New" Click="newbuttonCommand"/>
+                <MenuItem x:Name="filesaveButton" Header="Save"/>
+                <Separator Height="4"/>
                 <MenuItem x:Name="exitButton" Header="E_xit" Click="exitButtonCommand"/>
 
             </MenuItem>
@@ -26,26 +28,32 @@
             </MenuItem>
         </Menu>
         <Grid Grid.Column="1" Margin="20,25,13,5.83">
+            <Grid Margin="0,0,0,-50.39">
 
-            <GroupBox x:Name="groupBox" Header="Info"/>
-            <Label x:Name="infonameLabel" Content="Label" Height="30" Margin="13,21.83,13,0" VerticalAlignment="Top"/>
-            <Label x:Name="infostartingamountLabel" Content="Label" Margin="13,51.83,13,68.17"/>
-            <Label x:Name="infogoalamountLabel" Content="Label" Height="31" Margin="13,0,13,37.17" VerticalAlignment="Bottom"/>
-            <Label x:Name="infopercentageachievedLabel" Content="Label" Height="24" Margin="13,0,13,13.17" VerticalAlignment="Bottom"/>
+                <GroupBox x:Name="groupBox" Header="Info"/>
+                <Label x:Name="infonameLabel" Content="Label" Height="30" Margin="11,31.83,15,0" VerticalAlignment="Top"/>
+                <Label x:Name="infostartingamountLabel" Content="Label" Margin="12,62.83,14,81.352"/>
+                <Label x:Name="infogoalamountLabel" Content="Label" Margin="13.019,0,12.982,49.182" Height="31" VerticalAlignment="Bottom"/>
+                <Label x:Name="infopercentageachievedLabel" Content="Label" Height="29.988" Margin="13,0,13,17.182" VerticalAlignment="Bottom"/>
+
+
+
+            </Grid>
 
 
 
         </Grid>
-
-
-
-        <StackPanel x:Name="MathPanel" Grid.Column="0" Grid.Row="0" Width="320" HorizontalAlignment="Left" Margin="25,25,0,11">
-            <TextBox x:Name="textBox" Height="34" Margin="115,2,7,2" TextWrapping="Wrap" VerticalAlignment="Top" d:LayoutOverrides="HorizontalAlignment"/>
-            <TextBox x:Name="textBox1" Height="34" Margin="115,2,7,2" TextWrapping="Wrap"/>
-            <StackPanel Orientation="Horizontal" Margin="110,30,0,0" RenderTransformOrigin="0.488,0.554" Height="39.68" VerticalAlignment="Bottom" HorizontalAlignment="Right">
-                <Button x:Name="button"  Content="Add" Height="30" Width="96" Margin="2" VerticalAlignment="Bottom"/>
-                <Button x:Name="button1" Content="Subtract" Height="30"  Width="96" Margin="2" VerticalAlignment="Bottom" RenderTransformOrigin="0.812,0.561" />
+        <Grid x:Name="MathPanel" Grid.Column="0" Grid.Row="0" Width="325" HorizontalAlignment="Left" Margin="25,25,0,-39.56">
+            <Label x:Name="label" Content="Income/Expense:" HorizontalAlignment="Left" Height="30" Margin="5,31,0,0" Width="105" VerticalAlignment="Top"/>
+            <TextBox x:Name="textBox" TextWrapping="Wrap" d:LayoutOverrides="HorizontalAlignment" Margin="115,30,7,0" Height="30" VerticalAlignment="Top"/>
+            <TextBox x:Name="textBox1" TextWrapping="Wrap" Margin="115,65,7,70.182"/>
+            <StackPanel Orientation="Horizontal" RenderTransformOrigin="0.488,0.554" Height="39.68" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="0,0,6,8" d:LayoutOverrides="VerticalAlignment">
+                <Button x:Name="incomeButton"  Content="Income" Height="30" Width="96" Margin="2" VerticalAlignment="Bottom"/>
+                <Button x:Name="expenseButton" Content="Expense" Height="30"  Width="96" Margin="2" VerticalAlignment="Bottom" RenderTransformOrigin="0.812,0.561" />
             </StackPanel>
-        </StackPanel>
+            <Label x:Name="label1" Content="Value:" HorizontalAlignment="Left" Margin="5,66,0,59" Width="95"/>
+        </Grid>
+        <DataGrid x:Name="dataGrid" Grid.ColumnSpan="2" Margin="10,82.203,13,0" Grid.Row="1" Height="187.357" VerticalAlignment="Top"/>
+        <Button x:Name="Save" Content="Save" Grid.Column="1" Height="30" Margin="107.019,0,14,-6.5" Grid.Row="1" VerticalAlignment="Bottom"/>
     </Grid>
 </Window>
