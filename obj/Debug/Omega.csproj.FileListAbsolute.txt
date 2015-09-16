@@ -14,3 +14,6 @@ d:\my documents\visual studio 2015\Projects\Omega\Omega\obj\Debug\Omega.exe
 d:\my documents\visual studio 2015\Projects\Omega\Omega\obj\Debug\Omega.pdb
 d:\my documents\visual studio 2015\Projects\Omega\Omega\obj\Debug\NewEntry.g.cs
 d:\my documents\visual studio 2015\Projects\Omega\Omega\obj\Debug\NewEntry.baml
+C:\Users\Kosetsu\Documents\GitHub\Omega Project\snwmelt\Omega\bin\Debug\Omega.exe.config
+C:\Users\Kosetsu\Documents\GitHub\Omega Project\snwmelt\Omega\obj\Debug\Omega.exe
+C:\Users\Kosetsu\Documents\GitHub\Omega Project\snwmelt\Omega\obj\Debug\Omega.pdb
