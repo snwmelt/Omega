@@ -4,11 +4,14 @@ using System.ComponentModel;
 
 namespace Omega.Model
 {
+    // Make ISerializable on completion\\
     internal class Account : INotifyPropertyChanged
     {
         #region Private_Variables
 
         private Decimal _Balance;
+        private String _Name;
+        private List<Transaction> _Transactions;
 
         #endregion
 
@@ -23,10 +26,8 @@ namespace Omega.Model
         {
             Property = Value;
 
-            if (PropertyChanged != null)
-                PropertyChanged(this, new PropertyChangedEventArgs(PropertyName));
+            RaisePropertyChangedEvent(PropertyName);
         }
-
 
         /// <summary>
         /// Currently available funds within this account.
@@ -43,12 +44,65 @@ namespace Omega.Model
             }
         }
 
-        // Need to figure this out \\
-        public readonly List<Transaction> Debits;
-        
+        /// <summary>
+        /// Date of creation.
+        /// </summary>
+        public DateTime CreatedOn
+        {
+            private set;
+            get;
+        }
+
+        /// <summary>
+        /// Assign multiple Transaction object to the Account instance
+        /// </summary>
+        /// <param name="EndDate"></param>
+        /// <param name="Frequency"></param>
+        /// <param name="StartDate"></param>
+        /// <param name="Transaction"></param>
+        public void CreateRunningTransaction(DateTime EndDate, DateTime Frequency, DateTime StartDate, Transaction Transaction)
+        {
+
+        }
+
+        /// <summary>
+        /// Assign a Transaction object to the Account instance.
+        /// </summary>
+        /// <param name="Transaction"></param>
+        public void CreateTransaction(Transaction Transaction)
+        {
+            if (Transaction != null)
+            {
+                _Transactions.Add(Transaction);
+
+                RaisePropertyChangedEvent("Transactions");
+            }
+        }
+
         /// <summary>
         /// Event to be raised when a public class propety value is changed.
         /// </summary>
         public event PropertyChangedEventHandler PropertyChanged;
+
+        /// <summary>
+        /// Raise PropertyChanged event if not null.
+        /// </summary>
+        /// <param name="PropertyName"></param>
+        public void RaisePropertyChangedEvent(String PropertyName)
+        {
+            if (PropertyChanged != null)
+                PropertyChanged(this, new PropertyChangedEventArgs(PropertyName));
+        }
+        
+        /// <summary>
+        /// Resolved transactions.
+        /// </summary>
+        public IEnumerable<Transaction> Transactions
+        {
+            get
+            {
+                return _Transactions;
+            }
+        }
     }
 }
