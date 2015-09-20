@@ -17,3 +17,17 @@ d:\my documents\visual studio 2015\Projects\Omega\Omega\obj\Debug\NewEntry.baml
 C:\Users\Kosetsu\Documents\GitHub\Omega Project\snwmelt\Omega\bin\Debug\Omega.exe.config
 C:\Users\Kosetsu\Documents\GitHub\Omega Project\snwmelt\Omega\obj\Debug\Omega.exe
 C:\Users\Kosetsu\Documents\GitHub\Omega Project\snwmelt\Omega\obj\Debug\Omega.pdb
+C:\Users\Kosetsu\Documents\GitHub\Omega Project\snwmelt\Omega\bin\Debug\Omega.exe
+C:\Users\Kosetsu\Documents\GitHub\Omega Project\snwmelt\Omega\bin\Debug\Omega.pdb
+C:\Users\Kosetsu\Documents\GitHub\Omega Project\snwmelt\Omega\obj\Debug\Omega.csprojResolveAssemblyReference.cache
+C:\Users\Kosetsu\Documents\GitHub\Omega Project\snwmelt\Omega\obj\Debug\View\MainWindowView.g.cs
+C:\Users\Kosetsu\Documents\GitHub\Omega Project\snwmelt\Omega\obj\Debug\App.g.cs
+C:\Users\Kosetsu\Documents\GitHub\Omega Project\snwmelt\Omega\obj\Debug\Omega_MarkupCompile.cache
+C:\Users\Kosetsu\Documents\GitHub\Omega Project\snwmelt\Omega\obj\Debug\Omega_MarkupCompile.lref
+C:\Users\Kosetsu\Documents\GitHub\Omega Project\snwmelt\Omega\obj\Debug\View\MainWindowView.baml
+C:\Users\Kosetsu\Documents\GitHub\Omega Project\snwmelt\Omega\obj\Debug\Omega.g.resources
+C:\Users\Kosetsu\Documents\GitHub\Omega Project\snwmelt\Omega\obj\Debug\Omega.Properties.Resources.resources
+C:\Users\Kosetsu\Documents\GitHub\Omega Project\snwmelt\Omega\obj\Debug\Omega.csproj.GenerateResource.Cache
+C:\Users\Kosetsu\Documents\GitHub\Omega Project\snwmelt\Omega\obj\Debug\View\Control\ModernTextBox.g.cs
+C:\Users\Kosetsu\Documents\GitHub\Omega Project\snwmelt\Omega\obj\Debug\GeneratedInternalTypeHelper.g.cs
+C:\Users\Kosetsu\Documents\GitHub\Omega Project\snwmelt\Omega\obj\Debug\View\Control\ModernTextBox.baml
