@@ -10,11 +10,29 @@ namespace Omega.Model
         #region Private_Variables
 
         private Decimal _Balance;
-        private String _Name;
         private List<Transaction> _Transactions;
 
         #endregion
 
+        /// <summary>
+        /// Constructor.
+        /// </summary>
+        /// <param name="Name">Account Name</param>
+        public Account(String Name) : this(Name, 0.0m)
+        { }
+
+        /// <summary>
+        /// Constructor.
+        /// </summary>
+        /// <param name="Name">Account Name</param>
+        /// <param name="Balance">Starting Balance</param>
+        public Account(String Name, Decimal Balance)
+        {
+            _Balance      = Balance;
+            this.Name     = Name;
+            _Transactions = new List<Transaction>();
+        }
+        
         /// <summary>
         /// Assigns a value to a property and raises the PropertyChanged event if not null.
         /// </summary>
@@ -54,15 +72,20 @@ namespace Omega.Model
         }
 
         /// <summary>
-        /// Assign multiple Transaction object to the Account instance
+        /// Assign multiple Transaction objects to the Account instance based on frequency and time.
         /// </summary>
-        /// <param name="EndDate"></param>
-        /// <param name="Frequency"></param>
-        /// <param name="StartDate"></param>
-        /// <param name="Transaction"></param>
-        public void CreateRunningTransaction(DateTime EndDate, DateTime Frequency, DateTime StartDate, Transaction Transaction)
+        /// <param name="EndDate">Date to stop running transaction.</param>
+        /// <param name="Frequency">Time between Transaction objects.</param>
+        /// <param name="StartDate">Start date of running transaction.</param>
+        /// <param name="Transaction">Base Transaction object to repeat.</param>
+        public void CreateRunningTransaction(DateTime EndDate, TimeSpan Frequency, DateTime StartDate, Transaction Transaction)
         {
+            for (DateTime ReviewDate = StartDate; EndDate >= ReviewDate; ReviewDate = ReviewDate.Add(Frequency))
+            {
+                Transaction RepeatTransaction = new Transaction(Transaction.Amount, Transaction.Name, ReviewDate, Transaction.TransactionType);
 
+                CreateTransaction(RepeatTransaction);
+            }
         }
 
         /// <summary>
@@ -77,6 +100,15 @@ namespace Omega.Model
 
                 RaisePropertyChangedEvent("Transactions");
             }
+        }
+
+        /// <summary>
+        /// Account Name.
+        /// </summary>
+        public String Name
+        {
+            private set;
+            get;
         }
 
         /// <summary>
