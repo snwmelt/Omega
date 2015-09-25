@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Omega.Model.Enum;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 
@@ -9,8 +10,8 @@ namespace Omega.Model
     {
         #region Private_Variables
 
-        private Decimal _Balance;
-        private List<Transaction> _Transactions;
+        private Decimal                  _Balance;
+        private List<AccountTransaction> _Transactions;
 
         #endregion
 
@@ -30,7 +31,7 @@ namespace Omega.Model
         {
             _Balance      = Balance;
             this.Name     = Name;
-            _Transactions = new List<Transaction>();
+            _Transactions = new List<AccountTransaction>();
         }
         
         /// <summary>
@@ -52,7 +53,7 @@ namespace Omega.Model
         /// </summary>
         public Decimal Balance
         {
-            set
+            private set
             {
                 AssignPropertyValue<Decimal>(ref _Balance, "Balance", value);
             }
@@ -72,34 +73,39 @@ namespace Omega.Model
         }
 
         /// <summary>
-        /// Assign multiple Transaction objects to the Account instance based on frequency and time.
+        /// Assign multiple AccountTransaction objects to the Account instance based on frequency and time.
         /// </summary>
+        /// <param name="Amount">Repeat transaction amount.</param>
         /// <param name="EndDate">Date to stop running transaction.</param>
-        /// <param name="Frequency">Time between Transaction objects.</param>
+        /// <param name="Frequency">Time between AccountTransaction objects.</param>
+        /// <param name="Name">Transaction name.</param>
         /// <param name="StartDate">Start date of running transaction.</param>
-        /// <param name="Transaction">Base Transaction object to repeat.</param>
-        public void CreateRunningTransaction(DateTime EndDate, TimeSpan Frequency, DateTime StartDate, Transaction Transaction)
+        /// <param name="Type">Transaction type (i.e. Credit or Debit).</param>
+        public void CreateRunningTransaction(Decimal Amount, Account Destination, DateTime EndDate, TimeSpan Frequency, 
+                                             String Name, Account Origin, DateTime StartDate, TransactionType Type)
         {
             for (DateTime ReviewDate = StartDate; EndDate >= ReviewDate; ReviewDate = ReviewDate.Add(Frequency))
-            {
-                Transaction RepeatTransaction = new Transaction(Transaction.Amount, Transaction.Name, ReviewDate, Transaction.TransactionType);
-
-                CreateTransaction(RepeatTransaction);
-            }
+                CreateTransaction(Amount, Destination, Name, Origin, ReviewDate, Type);
         }
 
         /// <summary>
-        /// Assign a Transaction object to the Account instance.
+        /// Assign an AccountTransaction object to the Account instance.
         /// </summary>
-        /// <param name="Transaction"></param>
-        public void CreateTransaction(Transaction Transaction)
+        /// <param name="Amount">Transaction amount.</param>
+        /// <param name="Name">Transaction name.</param>
+        /// <param name="ReviewDate">Date for transaction state review.</param>
+        /// <param name="Type">Transaction type (i.e. Credit or Debit).</param>
+        public void CreateTransaction(Decimal Amount, Account Destiation, String Name, Account Origin, DateTime ReviewDate, 
+                                      TransactionType Type)
         {
-            if (Transaction != null)
-            {
-                _Transactions.Add(Transaction);
+            AccountTransaction Transaction = new AccountTransaction(Amount, this, TransactionCount, Name, ReviewDate, Type);
+            
+            Transaction.Destination = Destiation;
+            Transaction.Origin      = Origin;
 
-                RaisePropertyChangedEvent("Transactions");
-            }
+            _Transactions.Add(Transaction);
+
+            RaisePropertyChangedEvent("Transactions");
         }
 
         /// <summary>
@@ -117,7 +123,7 @@ namespace Omega.Model
         public event PropertyChangedEventHandler PropertyChanged;
 
         /// <summary>
-        /// Raise PropertyChanged event if not null.
+        /// Raise PropertyChanged event if not null. 
         /// </summary>
         /// <param name="PropertyName"></param>
         public void RaisePropertyChangedEvent(String PropertyName)
@@ -125,11 +131,22 @@ namespace Omega.Model
             if (PropertyChanged != null)
                 PropertyChanged(this, new PropertyChangedEventArgs(PropertyName));
         }
-        
+
         /// <summary>
-        /// Resolved transactions.
+        /// Number of account transactions.
         /// </summary>
-        public IEnumerable<Transaction> Transactions
+        public Int64 TransactionCount
+        {
+            get
+            {
+                return _Transactions.Count;
+            }
+        }
+
+        /// <summary>
+        /// Account transactions.
+        /// </summary>
+        public IEnumerable<AccountTransaction> Transactions
         {
             get
             {
