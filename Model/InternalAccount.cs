@@ -121,6 +121,31 @@ namespace Omega.Model
         }
 
         /// <summary>
+        /// Synchronously updates Account Blanace based on current date and time, and Account Transactions.
+        /// </summary>
+        public void Evaluate()
+        {
+            foreach (AccountTransaction Transaction in Transactions)
+            {
+                if (Transaction.State.Equals(TransactionState.Outstanding) && DateTime.Now >= Transaction.ReviewDate)
+                {
+                    switch (Transaction.Type)
+                    {
+                        case TransactionType.Credit:
+                            Balance += Transaction.Amount;
+                            break;
+
+                        case TransactionType.Debit:
+                            Balance -= Transaction.Amount;
+                            break;
+                    }
+
+                    Transaction.State = TransactionState.Resolved;
+                }
+            }
+        }
+
+        /// <summary>
         /// Account Name.
         /// </summary>
         public String Name
