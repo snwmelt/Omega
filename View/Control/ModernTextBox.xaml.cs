@@ -10,10 +10,14 @@ namespace Omega.View.Control
     /// </summary>
     public partial class ModernTextBox : TextBox
     {
+        #region Private_Variables
+
+        private String _PlaceholderText;
+
+        #endregion
         public ModernTextBox()
         {
             InitializeComponent();
-            DisplayPlaceholderText();
         }
 
         private void DisplayPlaceholderText()
@@ -41,8 +45,16 @@ namespace Omega.View.Control
 
         public String PlaceholderText
         {
-            get;
-            set;
+            get
+            {
+                return _PlaceholderText;
+            }
+            set
+            {
+                _PlaceholderText = value;
+
+                DisplayPlaceholderText();
+            }
         }
 
         private void RemovePlaceholderText()
