@@ -1,4 +1,5 @@
 ﻿using Omega.Model.Enum;
+using Omega.Model.Interface;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -6,7 +7,7 @@ using System.ComponentModel;
 namespace Omega.Model
 {
     // Make ISerializable on completion\\
-    internal class Account : INotifyPropertyChanged
+    internal class InternalAccount : IAccount, INotifyPropertyChanged
     {
         #region Private_Variables
 
@@ -19,7 +20,7 @@ namespace Omega.Model
         /// Constructor.
         /// </summary>
         /// <param name="Name">Account Name</param>
-        public Account(String Name) : this(Name, 0.0m)
+        public InternalAccount(UInt32 AccountNumber, String Name) : this(AccountNumber, 0.0m, Name)
         { }
 
         /// <summary>
@@ -27,11 +28,22 @@ namespace Omega.Model
         /// </summary>
         /// <param name="Name">Account Name</param>
         /// <param name="Balance">Starting Balance</param>
-        public Account(String Name, Decimal Balance)
+        public InternalAccount(UInt32 AccountNumber, Decimal Balance, String Name)
         {
-            _Balance      = Balance;
-            this.Name     = Name;
-            _Transactions = new List<AccountTransaction>();
+            this.AccountNumber = AccountNumber;
+            this.Balance       = Balance;
+            this.Name          = Name;
+            SortCode           = String.Empty; // Possibly use machine ID?
+            _Transactions      = new List<AccountTransaction>();
+        }
+
+        /// <summary>
+        /// Account identification number.
+        /// </summary>
+        public UInt32 AccountNumber
+        {
+            private set;
+            get;
         }
         
         /// <summary>
@@ -81,8 +93,8 @@ namespace Omega.Model
         /// <param name="Name">Transaction name.</param>
         /// <param name="StartDate">Start date of running transaction.</param>
         /// <param name="Type">Transaction type (i.e. Credit or Debit).</param>
-        public void CreateRunningTransaction(Decimal Amount, Account Destination, DateTime EndDate, TimeSpan Frequency, 
-                                             String Name, Account Origin, DateTime StartDate, TransactionType Type)
+        public void CreateRunningTransaction(Decimal Amount, IAccount Destination, DateTime EndDate, TimeSpan Frequency, 
+                                             String Name, IAccount Origin, DateTime StartDate, TransactionType Type)
         {
             for (DateTime ReviewDate = StartDate; EndDate >= ReviewDate; ReviewDate = ReviewDate.Add(Frequency))
                 CreateTransaction(Amount, Destination, Name, Origin, ReviewDate, Type);
@@ -95,7 +107,7 @@ namespace Omega.Model
         /// <param name="Name">Transaction name.</param>
         /// <param name="ReviewDate">Date for transaction state review.</param>
         /// <param name="Type">Transaction type (i.e. Credit or Debit).</param>
-        public void CreateTransaction(Decimal Amount, Account Destiation, String Name, Account Origin, DateTime ReviewDate, 
+        public void CreateTransaction(Decimal Amount, IAccount Destiation, String Name, IAccount Origin, DateTime ReviewDate, 
                                       TransactionType Type)
         {
             AccountTransaction Transaction = new AccountTransaction(Amount, this, TransactionCount, Name, ReviewDate, Type);
@@ -130,6 +142,15 @@ namespace Omega.Model
         {
             if (PropertyChanged != null)
                 PropertyChanged(this, new PropertyChangedEventArgs(PropertyName));
+        }
+
+        /// <summary>
+        /// Account location (i.e. bank and branch).
+        /// </summary>
+        public String SortCode
+        {
+            private set;
+            get;
         }
 
         /// <summary>

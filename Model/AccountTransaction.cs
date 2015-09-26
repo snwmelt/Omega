@@ -1,4 +1,5 @@
 ﻿using Omega.Model.Enum;
+using Omega.Model.Interface;
 using System;
 using System.ComponentModel;
 
@@ -9,10 +10,10 @@ namespace Omega.Model
     {
         #region Private_Variables
 
-        private Account          _Destination;
+        private IAccount         _Destination;
         private String           _Name;
-        private Account          _Origin;
-        private Account          _Owner;
+        private IAccount         _Origin;
+        private IAccount         _Owner;
         private DateTime         _ResolvedOn;
         private DateTime         _ReviewDate;
         private TransactionState _State;
@@ -20,7 +21,16 @@ namespace Omega.Model
 
         #endregion
 
-        public AccountTransaction(Decimal Amount, Account Owner, Int64 ID, String Name, DateTime ReviewDate, 
+        /// <summary>
+        /// Constructor.
+        /// </summary>
+        /// <param name="Amount">Transaction amount.</param>
+        /// <param name="Owner">Transaction owner Account.</param>
+        /// <param name="ID">Transaction identification number.</param>
+        /// <param name="Name">Transaction name.</param>
+        /// <param name="ReviewDate">DateTime for transaction state review.</param>
+        /// <param name="Type">Transaction type.</param>
+        public AccountTransaction(Decimal Amount, IAccount Owner, Int64 ID, String Name, DateTime ReviewDate, 
                                   TransactionType Type)
         {
             this.Amount     = Amount;
@@ -69,7 +79,7 @@ namespace Omega.Model
         /// <summary>
         /// AccountTransaction destination Account.
         /// </summary>
-        public Account Destination
+        public IAccount Destination
         {
             set
             {
@@ -111,7 +121,7 @@ namespace Omega.Model
         /// <summary>
         /// AccountTransaction origin Account.
         /// </summary>
-        public Account Origin
+        public IAccount Origin
         {
             set
             {
@@ -128,7 +138,7 @@ namespace Omega.Model
         /// <summary>
         /// AccountTransaction owning Account.
         /// </summary>
-        public Account Owner
+        public IAccount Owner
         {
             private set
             {
@@ -160,7 +170,7 @@ namespace Omega.Model
         }
 
         /// <summary>
-        /// Date for AccountTransaction instance state review.
+        /// DateTime for AccountTransaction instance state review.
         /// </summary>
         public DateTime ReviewDate
         {

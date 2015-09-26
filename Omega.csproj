@@ -58,10 +58,12 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Model\Account.cs" />
+    <Compile Include="Model\ExternalAccount.cs" />
+    <Compile Include="Model\InternalAccount.cs" />
     <Compile Include="Model\AccountTransaction.cs" />
     <Compile Include="Model\Enum\TransactionStateEnum.cs" />
     <Compile Include="Model\Enum\TransactionTypeEnum.cs" />
+    <Compile Include="Model\Interface\IAccount.cs" />
     <Compile Include="View\Control\ModernTextBox.xaml.cs">
       <DependentUpon>ModernTextBox.xaml</DependentUpon>
     </Compile>
