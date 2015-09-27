@@ -1,7 +1,7 @@
 ﻿using System;
-using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using System.Windows.Media;
 
 namespace Omega.View.Control
 {
@@ -13,8 +13,11 @@ namespace Omega.View.Control
         #region Private_Variables
 
         private String _PlaceholderText;
+        private Brush  _ForegroundBrush;
+        private Brush  _PlaceholderTextBrush;
 
         #endregion
+
         public ModernTextBox()
         {
             InitializeComponent();
@@ -25,6 +28,8 @@ namespace Omega.View.Control
             if (!String.IsNullOrEmpty(PlaceholderText) &&
                 String.IsNullOrWhiteSpace(Text))
             {
+                SwapTextBrush();
+
                 Text = PlaceholderText;
             }
         }
@@ -41,6 +46,20 @@ namespace Omega.View.Control
             base.OnLostKeyboardFocus(e);
 
             DisplayPlaceholderText();
+        }
+
+        public Brush PlaceholderTextBrush
+        {
+            set
+            {
+                _PlaceholderTextBrush = value;
+
+                SwapTextBrush();
+            }
+            get
+            {
+                return _PlaceholderTextBrush;
+            }
         }
 
         public String PlaceholderText
@@ -60,7 +79,26 @@ namespace Omega.View.Control
         private void RemovePlaceholderText()
         {
             if (Text.Equals(PlaceholderText))
+            {
                 Text = String.Empty;
+                SwapTextBrush();
+            }
+        }
+
+        private void SwapTextBrush()
+        {
+            if (PlaceholderTextBrush != null)
+            {
+                if (!Foreground.Equals(_PlaceholderTextBrush))
+                {
+                    _ForegroundBrush = Foreground;
+                    Foreground  = PlaceholderTextBrush;
+                }
+                else
+                {
+                    Foreground = _ForegroundBrush;
+                }
+            }
         }
     }
 }

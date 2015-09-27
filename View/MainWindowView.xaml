@@ -6,25 +6,101 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Omega.View"
         mc:Ignorable="d"
-        Title="MainWindowView" Height="768" Width="1024">    
-    <Grid SnapsToDevicePixels="True">
+        Title="MainWindowView" Height="585" Width="1024"
+        MinHeight="585" MinWidth="1024">
+    <Window.Resources>
+        <!--Control Templates Start-->
+
+        <ControlTemplate TargetType="Button" x:Key="ModernButtonTemplate">
+            <Border Name="Border" 
+                BorderThickness="{TemplateBinding BorderThickness}"
+                Padding        ="{TemplateBinding Padding}" 
+                BorderBrush    ="{TemplateBinding BorderBrush}"
+                Background     ="{TemplateBinding Background}">
+                <ContentPresenter Content="{TemplateBinding Content}" ContentTemplate="{TemplateBinding ContentTemplate}"
+                              HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" 
+                              Margin="{TemplateBinding Padding}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+            </Border>
+
+            <ControlTemplate.Triggers>
+                <Trigger Property="IsMouseOver" Value="true">
+                    <Setter Property="Opacity" Value="0.9"/>
+                </Trigger>
+
+                <Trigger Property="IsPressed" Value="true">
+                    <Setter Property="Opacity" Value="0.5"/>
+                </Trigger>
+            </ControlTemplate.Triggers>
+        </ControlTemplate>
+
+        <!--Control Templates End-->
+
+        <!--Styles Start-->
+
+        <Style TargetType="Button" BasedOn="{StaticResource {x:Static ToolBar.ButtonStyleKey}}">
+            <Setter Property="Opacity" Value="0.7"/>
+            <Setter Property="Template" Value="{StaticResource ResourceKey=ModernButtonTemplate}"/>
+        </Style>
+
+        <!--Styles End-->
+        
+        
+        <SolidColorBrush Color="LightGray" x:Key="InputBorderBrush"/>
+        <SolidColorBrush Color="LightGray" x:Key="ListContainerBorderBrush"/>
+    </Window.Resources>
+    <Grid Margin="2">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto"/>
             <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="30"/>
+            <ColumnDefinition Width="Auto"/>
         </Grid.ColumnDefinitions>
 
-        <Grid x:Name="AccountsListGrid" Grid.Column="0" Width="225">
+        <Grid x:Name="AccountsGrid" Grid.Column="0">
             <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="30"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
 
-            <c:ModernTextBox x:Name="AccountsSearchBox" BorderThickness="0,0,0,2" Grid.Row="0" Height="28" Margin="2" PlaceholderText="Add/Search Account" TextAlignment="Center" VerticalContentAlignment="Center"/>
+            <c:ModernTextBox BorderBrush="{StaticResource InputBorderBrush}" BorderThickness="0,0,0,1" FontSize="14" Grid.Row="0" 
+                             HorizontalContentAlignment="Center" Margin="1" PlaceholderText="Add/Search Account" 
+                             PlaceholderTextBrush="Gray" SnapsToDevicePixels="True" VerticalContentAlignment="Bottom" Width="250" 
+                             x:Name="AccountSearchTextBox"/>
 
-            <ListView x:Name="AccountsListListView" BorderThickness="0,2,2,0" Grid.Row="1" Margin="2"/>
+            <ListBox BorderBrush="{StaticResource ListContainerBorderBrush}" BorderThickness="1" Grid.Row="1" Margin="1" 
+                     ScrollViewer.VerticalScrollBarVisibility="Disabled" SnapsToDevicePixels="True" x:Name="AccountListListBox">
+                <ListBoxItem Height="60" BorderBrush="Gray" BorderThickness="2" Margin ="1,2"/>
+            </ListBox>
         </Grid>
 
-        <Grid x:Name="AccountDataGrid" Grid.Column="1">
+        <Grid x:Name="AccountTransactionsGrid" Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <StackPanel HorizontalAlignment="Left" Margin="4,1,0,2" Orientation="Horizontal" VerticalAlignment="Bottom">
+                <TextBlock Text="Balance : " FontSize="16" x:Name="BalanceTextTextBlock"/>
+                <TextBlock Text="£"          FontSize="16" x:Name="BalanceCurrencyTextBlock"/>
+                <TextBlock Text="00.00"      FontSize="16" x:Name="BalanceAmountTextBlock"/>
+            </StackPanel>
+
+            <Grid Grid.Row="0">
+                <c:ModernTextBox BorderBrush="{StaticResource InputBorderBrush}" BorderThickness="0,0,0,1" FontSize="14" Grid.Row="0" 
+                                 HorizontalContentAlignment="Center" HorizontalAlignment="Center" Margin="1" PlaceholderText="Search" 
+                                 PlaceholderTextBrush="Gray" SnapsToDevicePixels="True" VerticalContentAlignment="Bottom" 
+                                 VerticalAlignment="Bottom"  Width="250" x:Name="TransactionsSearchTextBox"/>
+
+                <Button BorderThickness="1" BorderBrush="LightGray" Content="Export" Height="28" HorizontalAlignment="Right" Margin="0,0,1,0" VerticalAlignment="Center" Width="114"/>
+            </Grid>
+
+            <ListBox BorderBrush="{StaticResource ListContainerBorderBrush}" BorderThickness="1" Grid.Row="1" Margin="1" 
+                     ScrollViewer.VerticalScrollBarVisibility="Disabled" SnapsToDevicePixels="True" x:Name="TransactionListListBox">
+                <ListBoxItem Height="35" BorderBrush="Gray" BorderThickness="2" Margin ="1,2"/>
+            </ListBox>
+        </Grid>
+
+        <Grid x:Name="AccountDataVisualizationGrid" Grid.Column="2">
             
         </Grid>
     </Grid>
